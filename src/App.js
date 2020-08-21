@@ -6,6 +6,7 @@ import CssBaseline from "@material-ui/core/CssBaseline"
 import MainContainer from "./components/MainContainer"
 import Drawer from "./components/Drawer"
 import CreateButton from "./components/CreateButton"
+import DeleteButton from "./components/DeleteButton"
 export const drawerWidth = 240
 
 const useStyles = makeStyles((theme) => ({
@@ -47,6 +48,7 @@ export default function App() {
           setDocuments={setDocuments}
           setActualDocument={setActualDocument}
         />
+        <DeleteButton />
       </main>
     </div>
   )
