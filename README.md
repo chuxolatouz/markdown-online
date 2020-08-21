@@ -7,7 +7,30 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Description
 
+This repository contain
+
+## How to Install
+
+1 - To install you only need to run `yarn`
+2 - To run server in dev mode you can run `yarn start`
+
+This should open a new tab into your default browser. If not Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+## Instructions
+
 ![Alt text](screenshots/markdown-online.jpg?raw=true "Title")
+
+### Create a document
+
+For create a new document you click into the `CREATE A MARKDOWN` button fill the Dialog with a name and press create
+
+### Delete a document
+
+For delete the actuald document click on `DESTROY THIS MARKDOWN` and confirm the warning
+
+## Documents
+
+The sidebar will allow all the documents thata have been created. Always it have a selected document. if you want to navigate between documents just click into the name
 
 ## Available Scripts
 
