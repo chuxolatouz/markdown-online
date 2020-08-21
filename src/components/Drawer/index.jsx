@@ -1,15 +1,12 @@
-import React from "react"
+import React, { useState } from "react"
 import Drawer from "@material-ui/core/Drawer"
 import List from "@material-ui/core/List"
 import { makeStyles } from "@material-ui/core/styles"
 import Divider from "@material-ui/core/Divider"
 import ListItem from "@material-ui/core/ListItem"
 import Toolbar from "@material-ui/core/Toolbar"
-import ListItemIcon from "@material-ui/core/ListItemIcon"
 import ListItemText from "@material-ui/core/ListItemText"
-import InboxIcon from "@material-ui/icons/MoveToInbox"
 import Typography from "@material-ui/core/Typography"
-import MailIcon from "@material-ui/icons/Mail"
 import { drawerWidth } from "../../App"
 
 const useStyles = makeStyles((theme) => ({
@@ -36,8 +33,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function DrawerBar() {
+export default function DrawerBar({ documents, setActualDocument }) {
   const classes = useStyles()
+  const [selectedItem, setSelectedItem] = useState(0)
+  const handleClick = (document, index) => {
+    setSelectedItem(index)
+    setActualDocument(document)
+  }
   return (
     <Drawer
       className={classes.drawer}
@@ -56,12 +58,14 @@ export default function DrawerBar() {
       </div>
       <Divider />
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
+        {documents.map((document, index) => (
+          <ListItem
+            selected={selectedItem === index}
+            button
+            key={`${document.name + index}`}
+            onClick={() => handleClick(document, index)}
+          >
+            <ListItemText primary={document.name} />
           </ListItem>
         ))}
       </List>

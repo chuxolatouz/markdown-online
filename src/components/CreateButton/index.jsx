@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import Button from "@material-ui/core/Button"
 import TextField from "@material-ui/core/TextField"
 
@@ -13,16 +13,26 @@ const useStyles = makeStyles((theme) => ({
     float: "right",
   },
 }))
-export default function CreateButton() {
+export default function CreateButton({ documents, setDocuments }) {
   const classes = useStyles()
 
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = useState(false)
+  const [value, setValue] = useState("")
 
   const handleClickOpen = () => {
     setOpen(true)
   }
 
   const handleClose = () => {
+    setOpen(false)
+  }
+  const handleCreate = () => {
+    const doc = {
+      name: value,
+      content: "**Hello world!!!**",
+    }
+    setDocuments([...documents, doc])
+    setValue("")
     setOpen(false)
   }
 
@@ -38,6 +48,8 @@ export default function CreateButton() {
             autoFocus
             margin="dense"
             id="name"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
             label="Name"
             type="text"
             fullWidth
@@ -47,7 +59,7 @@ export default function CreateButton() {
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleCreate} color="primary">
             Create
           </Button>
         </DialogActions>

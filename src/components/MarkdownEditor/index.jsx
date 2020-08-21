@@ -1,4 +1,4 @@
-import * as React from "react"
+import React, { useState } from "react"
 import ReactMde from "react-mde"
 import * as Showdown from "showdown"
 import "react-mde/lib/styles/css/react-mde-all.css"
@@ -9,21 +9,41 @@ const converter = new Showdown.Converter({
   strikethrough: true,
   tasklists: true,
 })
+const classes = {
+  reactMde: {
+    height: "75vh",
+  },
+}
 
-export default function MarkdownEditor() {
-  const [value, setValue] = React.useState("**Hello world!!!**")
+export default function MarkdownEditor({
+  actualDocument,
+  setActualDocument,
+  documents,
+  setDocuments,
+}) {
+  const [value, setValue] = useState(actualDocument)
   const [selectedTab, setSelectedTab] = React.useState("write")
+
+  const handleChange = (e) => {
+    let newDocuments = []
+    const index = documents.findIndex((e) => e.name === actualDocument.name)
+    value.content = e
+    setValue(value)
+    setActualDocument(value)
+    newDocuments[index] = value
+    setDocuments(newDocuments)
+  }
+
   return (
-    <div className="container">
-      <ReactMde
-        value={value}
-        onChange={setValue}
-        selectedTab={selectedTab}
-        onTabChange={setSelectedTab}
-        generateMarkdownPreview={(markdown) =>
-          Promise.resolve(converter.makeHtml(markdown))
-        }
-      />
-    </div>
+    <ReactMde
+      value={value.content}
+      classes={classes}
+      onChange={handleChange}
+      selectedTab={selectedTab}
+      onTabChange={setSelectedTab}
+      generateMarkdownPreview={(markdown) =>
+        Promise.resolve(converter.makeHtml(markdown))
+      }
+    />
   )
 }
