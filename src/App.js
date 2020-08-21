@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react"
+import { makeStyles } from "@material-ui/core/styles"
 
-function App() {
+import CssBaseline from "@material-ui/core/CssBaseline"
+
+import MainContainer from "./components/MainContainer"
+import Drawer from "./components/Drawer"
+import CreateButton from "./components/CreateButton"
+export const drawerWidth = 240
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+  },
+  appBar: {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth,
+  },
+  content: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.default,
+    padding: theme.spacing(3),
+  },
+}))
+
+export default function App() {
+  const classes = useStyles()
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={classes.root}>
+      <CssBaseline />
+      <Drawer />
+      <main className={classes.content}>
+        <div className={classes.toolbar} />
+        <MainContainer />
+        <CreateButton />
+      </main>
     </div>
-  );
+  )
 }
-
-export default App;
