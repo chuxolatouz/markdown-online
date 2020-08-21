@@ -28,10 +28,8 @@ export default function AlertDialogSlide({
     setOpen(false)
   }
   const handleConfirm = () => {
-    debugger
     if (documents.length > 1) {
       const newDocuments = documents
-      debugger
       const index = documents.findIndex((e) => e.name === actualDocument.name)
       if (index > -1) {
         newDocuments.splice(index, 1)
