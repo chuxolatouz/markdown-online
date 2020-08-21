@@ -48,7 +48,12 @@ export default function App() {
           setDocuments={setDocuments}
           setActualDocument={setActualDocument}
         />
-        <DeleteButton />
+        <DeleteButton
+          actualDocument={actualDocument}
+          documents={documents}
+          setDocuments={setDocuments}
+          setActualDocument={setActualDocument}
+        />
       </main>
     </div>
   )

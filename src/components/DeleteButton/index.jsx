@@ -12,7 +12,12 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />
 })
 
-export default function AlertDialogSlide() {
+export default function AlertDialogSlide({
+  setDocuments,
+  documents,
+  actualDocument,
+  setActualDocument,
+}) {
   const [open, setOpen] = React.useState(false)
 
   const handleClickOpen = () => {
@@ -20,6 +25,20 @@ export default function AlertDialogSlide() {
   }
 
   const handleClose = () => {
+    setOpen(false)
+  }
+  const handleConfirm = () => {
+    debugger
+    if (documents.length > 1) {
+      const newDocuments = documents
+      debugger
+      const index = documents.findIndex((e) => e.name === actualDocument.name)
+      if (index > -1) {
+        newDocuments.splice(index, 1)
+        setDocuments(newDocuments)
+        setActualDocument(newDocuments[0])
+      }
+    }
     setOpen(false)
   }
 
@@ -54,7 +73,11 @@ export default function AlertDialogSlide() {
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleClose} startIcon={<DeleteIcon />} color="secondary">
+          <Button
+            onClick={handleConfirm}
+            startIcon={<DeleteIcon />}
+            color="secondary"
+          >
             Confirm
           </Button>
         </DialogActions>

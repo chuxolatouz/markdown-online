@@ -31,6 +31,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing(3),
   },
+  selected: {
+    backgroundColor: "#482880",
+  },
 }))
 
 export default function DrawerBar({ documents, setActualDocument }) {
