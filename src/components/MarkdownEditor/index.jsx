@@ -23,14 +23,18 @@ export default function MarkdownEditor({
 }) {
   const [value, setValue] = useState(actualDocument)
   const [selectedTab, setSelectedTab] = React.useState("write")
-
+  React.useEffect(() => {
+    setValue(actualDocument)
+  }, [actualDocument])
   const handleChange = (e) => {
-    let newDocuments = []
+    let newDocuments = documents
+    let newValue = { name: "", content: "" }
     const index = documents.findIndex((e) => e.name === actualDocument.name)
-    value.content = e
-    setValue(value)
-    setActualDocument(value)
-    newDocuments[index] = value
+    newValue.content = e
+    newValue.name = actualDocument.name
+    newDocuments[index] = newValue
+    setValue(newValue)
+    setActualDocument(newValue)
     setDocuments(newDocuments)
   }
 

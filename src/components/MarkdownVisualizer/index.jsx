@@ -10,10 +10,12 @@ const converter = new Showdown.Converter({
   tasklists: true,
 })
 
-export default function MarkdownEditor({ actualDocument }) {
+export default function MarkdownVisualizer({ actualDocument }) {
   const [value, setValue] = React.useState(actualDocument)
   const [selectedTab, setSelectedTab] = React.useState("preview")
-
+  React.useEffect(() => {
+    setValue(actualDocument)
+  }, [actualDocument])
   return (
     <ReactMde
       value={value.content}
